@@ -11,7 +11,14 @@ print("Tensor:",x)
 # zeros / ones / random     [rows,cols]
 a = torch.zeros(2,3)
 b = torch.ones(2,4)
-c = torch.rand(2,3)
+c = torch.rand(2,3)                     # Uniform distribution
+d = torch.randn(2, 3)                   # Normal (Gaussian) distribution  (Mean = 0, Std = 1)
+e = torch.tensor([[1, 2], [3, 4]])
+f = torch.zeros_like(e)                 # Creates a new tensor full of 0s same size as tensor e
+
+
+data =torch.arange(0, 10, 2)
+print(data,"\n")        # Creates tensor withvalues in a range with a step
 
 print(a,"\n")
 print(b,"\n")
@@ -42,3 +49,10 @@ print(a.shape)                          #torch.Size([2, 3, 4]) => 2 blocks + 3 r
 
 a = torch.zeros(32, 3, 224, 224)
 print(a.shape)                          #torch.Size([32, 3, 224, 224])
+
+# tensor datatypes
+print(a.dtype)                          #[1,2,3] =>  int64 
+print(b.dtype)                          #[1.0,2.0] => float32
+print(c.dtype)
+print(e.dtype)
+
