@@ -147,3 +147,15 @@ a = t.numpy()
 print(a)
 t[0] = 101
 print(a)     # also changes
+
+#--------------------------------Reproducibility----------------------------------#
+
+# print 1 == print 2 => True
+torch.manual_seed(42)
+print(torch.rand(3,4))
+
+torch.manual_seed(42)
+print(torch.rand(3,4))
+
+#this tensor will be next rand2 which will be fixed value on each run (just a next sequence of random values)
+print(torch.rand(3,4))      
