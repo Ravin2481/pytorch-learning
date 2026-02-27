@@ -14,11 +14,17 @@ stack([x,y],dim=0) => join tensors along a NEW dimension / puts tensors on top o
 
 cat([x,y],dim=0) => extends the same line + does NOT increase dimensions
 
+1. vstack() => stacks tensors vertically (adds rows) columns must match
+               same as cat(dim=0) for 2D
+
+2. hstack() => stacks tensors horizontally (adds columns) rows must match
+               same as cat(dim=1) for 2D
+
 unsqueeze() => We only wrapped the whole data inside one extra outer bracket.
 
-squeeze() => We removed the extra bracket.
+squeeze() => We remove the extra bracket. (remove 1 dimension)
 
-permute() => rearranges the order of dimensions (axes)
+permute() => rearranges the order of dimensions (axes) & it does NOT make a copy.
              used when required image from HWC → CHW.
              After permute the tensor becomes non-contiguous in memory,
              so view() will not work directly — reshape() or contiguous().view()
@@ -92,3 +98,30 @@ img  = (224, 224, 3) #=> (H, W, C) #pytorch accept => (Channels, Height, Width)
 img = img.permute(2, 0, 1) 
 
 img.shape # (3, 224, 224)
+
+
+
+
+#--------------------------------indexing----------------------------------#
+
+x = torch.tensor([10, 20, 30, 40])
+
+print(x[0])   # 10
+print(x[-1])  # 40
+
+x = torch.tensor([[1, 2, 3],
+                  [4, 5, 6]])
+
+# all row & only column 1
+x[:, 1] # [2, 5]
+
+# all row and column from index 1 onward
+x[:, 1:]
+
+#--------------------------------Boolean indexing----------------------------------#
+
+x = torch.tensor([5, 12, 7, 20, 3])
+
+mask = x > 10   # [F,  T,  F,  T,  F]
+
+x[mask] # [12, 20]
