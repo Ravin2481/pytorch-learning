@@ -93,7 +93,7 @@ y = x.permute(1, 2, 0)      # [[[1],[2],[3]],[[4],[5],[6]]] changed dimention
 y.shape     #(2, 3, 1)
 
 
-img  = (224, 224, 3) #=> (H, W, C) #pytorch accept => (Channels, Height, Width)
+img  = torch.rand(224, 224, 3) #=> (H, W, C) #pytorch accept => (Channels, Height, Width)
 
 img = img.permute(2, 0, 1) 
 
@@ -125,3 +125,25 @@ x = torch.tensor([5, 12, 7, 20, 3])
 mask = x > 10   # [F,  T,  F,  T,  F]
 
 x[mask] # [12, 20]
+
+
+#--------------------------------Numpy => tensor----------------------------------#
+
+import numpy as np
+
+a = np.array([1, 2, 3])
+
+t = torch.from_numpy(a)
+print(t)
+
+a[0] = 99
+print(t)     # also changes
+#--------------------------------tensor => Numpy----------------------------------#
+
+t = torch.tensor([1, 2, 3])
+
+a = t.numpy()
+
+print(a)
+t[0] = 101
+print(a)     # also changes
