@@ -49,5 +49,7 @@ def plot_predictions(
     # Show the legend
     plt.legend(prop={"size": 14})
 
-plot_predictions()
-plt.show()
+
+if __name__ == "__main__":
+    plot_predictions()
+    plt.show()
