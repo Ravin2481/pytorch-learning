@@ -16,6 +16,8 @@ class LinearRegressionModel(nn.Module):
     
 model = LinearRegressionModel()
 
+model.eval()    # sets the model to evaluation mode by disabling training-specific layer behavior like dropout and batchnorm updates.
+
 #Both are used during inference (prediction time) to stop PyTorch from tracking gradients
 with torch.inference_mode():        # preferred over "with torch.no_grad():"=> Bcuz more optimized version of no_grad() for inference.
     y_pred = model(X_test)
@@ -38,7 +40,11 @@ Flow:
     optimizer.zero_grad()    # clear old grads
     loss.backward()          # compute new grads
     optimizer.step()         # update weights
+-------------------------------------------------------------------------------
+model.state_dict()      # returns a dictionary of all learnable parameters (name of paramter : value) .
+model.parameters()      # return trainable tensors (used in optimizer)
 
-    model.state_dict()       # returns a dictionary of all learnable parameters and buffers of the model.
+model.train()           # used when doing training - Dropout ON , BatchNorm updates (drops random neurons to prevent overfitting)
+model.eval()            # used when doing prdection - Dropout OFF, BatchNorm fixed
 
 """
