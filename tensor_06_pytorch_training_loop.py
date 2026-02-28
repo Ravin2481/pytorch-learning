@@ -3,7 +3,8 @@ from torch import nn
 import matplotlib.pyplot as plt
 from tensor_05_pytorch_model import LinearRegressionModel 
 
-
+#Take proper x & y data set 
+X_train = Y_train = X_test = Y_test = torch.rand(1)
 
 model = LinearRegressionModel
 
@@ -28,7 +29,7 @@ for epoch in range(epochs):
     y_pred = model(X_train)
 
     # 2. Calculate the loss
-    loss = loss_fn(y_pred, y_train)
+    loss = loss_fn(y_pred, Y_train)
 
     # 3. Optimizer zero grad => set weight.grad = 0, bias.grad = 0 for fresh compute 
     optimizer.zero_grad()
@@ -42,7 +43,7 @@ for epoch in range(epochs):
     model.eval()  # turns off gradient tracking
     with torch.inference_mode():
         test_pred = model(X_test)
-        test_loss = loss_fn(test_pred, y_test)
+        test_loss = loss_fn(test_pred, Y_test)
 
 """
 FLOW:
